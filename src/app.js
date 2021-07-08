@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
-const port = 3000
+// define the correct method for Heroku to run the program
+const port = process.env.PORT || 3000
 const path = require('path')
 
 const hbs = require('hbs')
@@ -101,5 +102,5 @@ app.get('*', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`)
+    console.log(`Server listening at ${port}`)
 })
