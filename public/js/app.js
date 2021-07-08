@@ -12,6 +12,15 @@ weatherForm.addEventListener('submit', (event) => {
     const location = search.value;
     const url = `/weather?address=${location}`
 
+    const currentIcon = document.querySelector('#icon')
+    const main = document.querySelector('main')
+
+    if (currentIcon) {
+        main.removeChild(currentIcon)
+    }
+
+    const icon = document.createElement('img')
+
     fetch(url)
         .then((response) => {
             response.json()
@@ -21,6 +30,12 @@ weatherForm.addEventListener('submit', (event) => {
                     } else {
                         messageOne.textContent = data.location
                         messageTwo.textContent = data.forecast
+                        if (data.icon) {
+                            icon.setAttribute('src', data.icon)
+                            icon.setAttribute('alt', 'weather icon')
+                            icon.setAttribute('id', 'icon')
+                            main.appendChild(icon)
+                        }
                     }
                 })
         })
